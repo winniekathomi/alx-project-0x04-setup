@@ -1,39 +1,13 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
+// store/store.ts
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "./counterSlice";
 
-// Slice for counter state
-const counterSlice = createSlice({
-  name: "counter",
-  initialState: {
-    value: 0,
-  },
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    decrement: (state) => {
-      if (state.value > 0) {
-        state.value -= 1;
-      }
-    },
-  },
-});
-
-// Create the Redux store
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    counter: counterSlice.reducer,
+    counter: counterReducer, // 👈 make sure the key is 'counter'
   },
 });
 
-// Export actions
-export const { increment, decrement } = counterSlice.actions;
-
-// Export types
+// Types for Redux hooks
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
-// Custom hook to use dispatch
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-
-export default store;
