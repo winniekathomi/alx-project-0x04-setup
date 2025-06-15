@@ -1,13 +1,13 @@
 // context/CountContext.tsx
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from "react";
 
-interface CountContextType {
+interface CountContextProps {
   count: number;
   increment: () => void;
   decrement: () => void;
 }
 
-const CountContext = createContext<CountContextType | undefined>(undefined);
+const CountContext = createContext<CountContextProps | undefined>(undefined);
 
 export const CountProvider = ({ children }: { children: ReactNode }) => {
   const [count, setCount] = useState(0);
@@ -22,10 +22,10 @@ export const CountProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useCount = (): CountContextType => {
+export const useCount = () => {
   const context = useContext(CountContext);
   if (!context) {
-    throw new Error('useCount must be used within a CountProvider');
+    throw new Error("useCount must be used within a CountProvider");
   }
   return context;
 };

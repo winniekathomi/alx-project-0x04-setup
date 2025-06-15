@@ -1,12 +1,14 @@
 // pages/_app.tsx
-import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { CountProvider } from "@/context/CountContext"; // Make sure this path is correct
+import Layout from "@/components/layouts/Layout"; // ✅ Required!
+import "@/styles/globals.css"; // ✅ Global styles
 
-export default function App({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <CountProvider>
+    <Layout>
       <Component {...pageProps} />
-    </CountProvider>
+    </Layout>
   );
 }
+
+export default MyApp;
